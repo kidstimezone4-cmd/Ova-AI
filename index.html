@@ -4,68 +4,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OVA AI - Create Your Imagination</title>
+<title>OVA AI - AI Movie Studio</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#080b18;color:white;min-height:100vh}
-header{display:flex;justify-content:space-between;align-items:center;padding:22px 7%;border-bottom:1px solid #252b43}
-.logo{font-size:30px;font-weight:900;letter-spacing:3px;color:#a5b4fc}
-nav a{color:#ddd;text-decoration:none;margin-left:20px;font-size:14px}
-.hero{text-align:center;padding:75px 20px 35px}
-.tag{color:#a5b4fc;border:1px solid #555b9b;border-radius:30px;padding:9px 17px;display:inline-block;font-size:12px}
-h1{font-size:clamp(42px,8vw,75px);margin:28px 0 15px;line-height:1.1}
-h1 span{background:linear-gradient(90deg,#818cf8,#e879f9);color:transparent;background-clip:text}
-.hero p{color:#aab0c5;line-height:1.7}
-.studio{max-width:760px;margin:30px auto;padding:25px;background:#141a2e;border:1px solid #343b61;border-radius:22px}
-label{display:block;margin-bottom:12px;font-weight:bold}
-textarea,select{width:100%;padding:15px;background:#090e20;color:white;border:1px solid #343b61;border-radius:12px;margin-bottom:20px;font-size:15px}
-textarea{height:120px;resize:vertical}
-.options{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-button{width:100%;padding:17px;border:0;border-radius:12px;background:linear-gradient(90deg,#6366f1,#c026d3);color:white;font-size:17px;font-weight:bold;cursor:pointer}
-button:hover{opacity:.9}
-.note{text-align:center;color:#929bb5;font-size:12px;margin-top:15px}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:15px;max-width:900px;margin:45px auto;padding:0 20px}
-.feature{padding:23px 12px;text-align:center;background:#141a2e;border:1px solid #303750;border-radius:16px}
-.feature b{display:block;margin-bottom:8px}
-.feature small{color:#aab0c5}
-footer{text-align:center;padding:35px;color:#858da5}
-@media(max-width:600px){header{padding:18px 5%}nav a{margin-left:9px;font-size:12px}.studio{margin:20px 12px;padding:18px}.options{grid-template-columns:1fr}.hero{padding-top:55px}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#050713;color:#fff;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,#26206b55,transparent 40%),radial-gradient(ellipse at 80% 60%,#741b8650,transparent 40%);z-index:-2}
+.orb{position:fixed;width:260px;height:260px;border-radius:50%;filter:blur(75px);opacity:.35;z-index:-1;animation:float 9s infinite alternate}
+.orb.one{background:#6846ff;top:10%;left:-100px}
+.orb.two{background:#e52bca;right:-120px;bottom:5%;animation-delay:2s}
+@keyframes float{to{transform:translate(100px,70px) scale(1.3)}}
+header{height:75px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff18;background:#080b1dcc;backdrop-filter:blur(20px);position:sticky;top:0;z-index:10}
+.logo{font-size:26px;font-weight:900;letter-spacing:3px;color:#b6a8ff;text-shadow:0 0 20px #806aff}
+.logo span{color:#fff}
+nav{display:flex;gap:24px}
+nav a{color:#c9c9e0;text-decoration:none;font-size:13px}
+nav a:hover{color:#c4aaff}
+.hero{text-align:center;padding:75px 18px 30px}
+.tag{display:inline-block;border:1px solid #8c70ff66;background:#8c70ff16;padding:10px 17px;border-radius:40px;color:#c5b7ff;font-size:11px;letter-spacing:2px}
+h1{font-size:clamp(43px,9vw,82px);line-height:1.08;margin:27px 0 18px;letter-spacing:-3px}
+.gradient{background:linear-gradient(90deg,#7e8cff,#d58aff,#ff78cf);background-clip:text;color:transparent}
+.hero p{color:#a8acc5;line-height:1.8;font-size:15px}
+.hero .sub{font-size:12px;color:#777f9e;margin-top:12px}
+.studio{width:min(850px,92%);margin:35px auto;padding:27px;background:linear-gradient(145deg,#171d36ee,#101329ee);border:1px solid #8a7bff55;border-radius:25px;box-shadow:0 25px 90px #0008,0 0 35px #725bff18;backdrop-filter:blur(20px)}
+.studio-title{font-size:20px;margin-bottom:8px}
+.hint{color:#929ab9;font-size:12px;margin-bottom:22px}
+label{display:block;font-size:13px;font-weight:bold;margin-bottom:10px;color:#d9d9f0}
+textarea,select{width:100%;background:#090e20;color:white;border:1px solid #41476c;border-radius:12px;padding:15px;font-size:14px;margin-bottom:19px;outline:none}
+textarea{height:130px;resize:vertical;line-height:1.6}
+textarea:focus,select:focus{border-color:#9b83ff;box-shadow:0 0 15px #806aff30}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+button{cursor:pointer;border:0;color:white;font-weight:bold}
+.create{width:100%;padding:18px;border-radius:13px;font-size:16px;background:linear-gradient(100deg,#635bff,#a43be9,#e044bb);box-shadow:0 8px 30px #8b48ed55;transition:.25s}
+.create:hover{transform:translateY(-3px);box-shadow:0 12px 40px #a34bff77}
+.note{text-align:center;color:#8e96b3;font-size:11px;margin-top:15px;line-height:1.6}
+.features{width:min(1000px,92%);margin:55px auto;display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.feature{background:linear-gradient(145deg,#171d36,#0e1225);border:1px solid #34385c;padding:24px 13px;border-radius:17px;text-align:center;transition:.3s}
+.feature:hover{transform:translateY(-7px);border-color:#9b83ff;box-shadow:0 12px 30px #5140a533}
+.feature .icon{font-size:30px;margin-bottom:13px}
+.feature b{display:block;font-size:14px;margin-bottom:9px}
+.feature small{font-size:11px;color:#9ba2bf;line-height:1.5}
+.section{text-align:center;margin:60px 15px 25px}
+.section h2{font-size:30px;margin-bottom:10px}
+.section p{font-size:13px;color:#9ba2bf}
+footer{text-align:center;padding:35px 15px;color:#737b99;font-size:12px;border-top:1px solid #ffffff15;margin-top:60px}
+@media(max-width:650px){
+header{padding:0 5%;height:65px}
+.logo{font-size:22px}
+nav{gap:12px}
+nav a{font-size:11px}
+.hero{padding-top:55px}
+.grid{grid-template-columns:1fr}
+.features{grid-template-columns:1fr 1fr}
+.studio{padding:20px}
+}
 </style>
 </head>
 <body>
+<div class="orb one"></div>
+<div class="orb two"></div>
+
 <header>
-<div class="logo">OVA AI ✦</div>
-<nav><a href="#studio">Create</a><a href="#features">Features</a></nav>
+<div class="logo">OVA <span>AI ✦</span></div>
+<nav>
+<a href="#studio">Create</a>
+<a href="#features">Features</a>
+</nav>
 </header>
+
 <section class="hero">
-<div class="tag">✦ NEXT GENERATION AI VIDEO STUDIO</div>
-<h1>Create Your<br><span>Imagination</span></h1>
-<p>One Prompt. One Movie. Your Imagination Has No Limits.</p>
+<div class="tag">✦ NEXT GENERATION AI MOVIE STUDIO</div>
+<h1>Your Imagination<br><span class="gradient">Becomes Cinema.</span></h1>
+<p>Create Hollywood-style 3D animation and ultra-realistic AI movies.</p>
+<p class="sub">One Prompt · Multiple Scenes · Endless Creativity</p>
 </section>
+
 <section class="studio" id="studio">
-<label>Describe Your Video</label>
-<textarea id="prompt" placeholder="Describe your movie, characters, scenes and story..."></textarea>
-<div class="options">
-<div><label>Video Style</label><select><option>Realistic 3D Animation</option><option>Cartoon 3D</option><option>Cinematic</option><option>Anime</option></select></div>
-<div><label>Language</label><select><option>Tamil</option><option>English</option><option>Hindi</option><option>Arabic</option><option>All Languages</option></select></div>
-<div><label>Duration</label><select><option>1 Minute</option><option>3 Minutes</option><option>5 Minutes</option><option>10 Minutes</option><option>Custom Duration</option></select></div>
-<div><label>Quality</label><select><option>HD</option><option>Full HD</option><option>4K</option></select></div>
+<h2 class="studio-title">✦ Create Your AI Movie</h2>
+<p class="hint">Describe your imagination. Let OVA AI bring it to life.</p>
+
+<label>Your Movie Prompt</label>
+<textarea id="prompt" placeholder="Describe your story, characters, environment, actions, camera movements and dialogue..."></textarea>
+
+<div class="grid">
+<div>
+<label>Video Style</label>
+<select id="style">
+<option>Hollywood 3D Animation</option>
+<option>Ultra Realistic</option>
+<option>Realistic 3D Cartoon</option>
+<option>Cinematic Movie</option>
+<option>Anime</option>
+</select>
 </div>
-<button onclick="createVideo()">✦ Create My Video</button>
-<div class="note">Target price: ₹10 per video · Actual generation requires an AI service connection.</div>
+<div>
+<label>Video Language</label>
+<select id="language">
+<option>Tamil</option>
+<option>English</option>
+<option>Hindi</option>
+<option>Arabic</option>
+<option>All Languages</option>
+</select>
+</div>
+<div>
+<label>Movie Duration</label>
+<select id="duration">
+<option>1 Minute</option>
+<option>3 Minutes</option>
+<option>5 Minutes</option>
+<option>10 Minutes</option>
+<option>15 Minutes</option>
+<option>30 Minutes</option>
+<option>Custom Duration</option>
+</select>
+</div>
+<div>
+<label>Video Quality</label>
+<select id="quality">
+<option>Full HD 1080p</option>
+<option>HD 720p</option>
+<option>4K Ultra HD</option>
+</select>
+</div>
+</div>
+
+<button class="create" onclick="createMovie()">✦ CREATE MY AI MOVIE</button>
+<p class="note">AI generation requires a connected video service. Duration and quality depend on available models, processing limits and cost.</p>
 </section>
-<section class="features" id="features">
-<div class="feature"><b>🎬 3D Animation</b><small>Animated movie creation</small></div>
-<div class="feature"><b>🎙️ AI Tamil Voice</b><small>Multilingual voice</small></div>
-<div class="feature"><b>🎵 AI Music</b><small>Music and sound effects</small></div>
-<div class="feature"><b>✨ HD / 4K</b><small>Video export options</small></div>
+
+<div class="section" id="features">
+<h2>Powerful AI Studio</h2>
+<p>Everything you need to create your next movie.</p>
+</div>
+
+<section class="features">
+<div class="feature"><div class="icon">🎬</div><b>3D Animation</b><small>Hollywood-inspired animated movies</small></div>
+<div class="feature"><div class="icon">🌎</div><b>All Languages</b><small>Multilingual video creation</small></div>
+<div class="feature"><div class="icon">🎙️</div><b>AI Voice</b><small>Voice, dialogue and lip sync</small></div>
+<div class="feature"><div class="icon">✨</div><b>Ultra HD</b><small>High-quality movie export</small></div>
 </section>
-<footer>© 2026 OVA AI · Create Your Imagination</footer>
+
+<footer>© 2026 OVA AI · CREATE YOUR IMAGINATION ✦</footer>
+
 <script>
-function createVideo(){
- const p=document.getElementById('prompt').value.trim();
- if(!p){alert('Please describe your video first!');return;}
- alert('OVA AI Studio UI is ready! AI video generation connection will be added next.');
+function createMovie(){
+const prompt=document.getElementById("prompt").value.trim();
+if(!prompt){alert("Please describe your movie first!");return;}
+alert("OVA AI Design is ready! Real AI video generation will work after connecting the secure AI backend.");
 }
 </script>
 </body>
