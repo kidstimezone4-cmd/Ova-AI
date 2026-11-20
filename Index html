@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OVA AI - Create Your Imagination</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#080b18;color:white;min-height:100vh}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 7%;border-bottom:1px solid #252b43}
+.logo{font-size:30px;font-weight:900;letter-spacing:3px;color:#a5b4fc}
+nav a{color:#ddd;text-decoration:none;margin-left:20px;font-size:14px}
+.hero{text-align:center;padding:75px 20px 35px}
+.tag{color:#a5b4fc;border:1px solid #555b9b;border-radius:30px;padding:9px 17px;display:inline-block;font-size:12px}
+h1{font-size:clamp(42px,8vw,75px);margin:28px 0 15px;line-height:1.1}
+h1 span{background:linear-gradient(90deg,#818cf8,#e879f9);color:transparent;background-clip:text}
+.hero p{color:#aab0c5;line-height:1.7}
+.studio{max-width:760px;margin:30px auto;padding:25px;background:#141a2e;border:1px solid #343b61;border-radius:22px}
+label{display:block;margin-bottom:12px;font-weight:bold}
+textarea,select{width:100%;padding:15px;background:#090e20;color:white;border:1px solid #343b61;border-radius:12px;margin-bottom:20px;font-size:15px}
+textarea{height:120px;resize:vertical}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+button{width:100%;padding:17px;border:0;border-radius:12px;background:linear-gradient(90deg,#6366f1,#c026d3);color:white;font-size:17px;font-weight:bold;cursor:pointer}
+button:hover{opacity:.9}
+.note{text-align:center;color:#929bb5;font-size:12px;margin-top:15px}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:15px;max-width:900px;margin:45px auto;padding:0 20px}
+.feature{padding:23px 12px;text-align:center;background:#141a2e;border:1px solid #303750;border-radius:16px}
+.feature b{display:block;margin-bottom:8px}
+.feature small{color:#aab0c5}
+footer{text-align:center;padding:35px;color:#858da5}
+@media(max-width:600px){header{padding:18px 5%}nav a{margin-left:9px;font-size:12px}.studio{margin:20px 12px;padding:18px}.options{grid-template-columns:1fr}.hero{padding-top:55px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">OVA AI ✦</div>
+<nav><a href="#studio">Create</a><a href="#features">Features</a></nav>
+</header>
+<section class="hero">
+<div class="tag">✦ NEXT GENERATION AI VIDEO STUDIO</div>
+<h1>Create Your<br><span>Imagination</span></h1>
+<p>One Prompt. One Movie. Your Imagination Has No Limits.</p>
+</section>
+<section class="studio" id="studio">
+<label>Describe Your Video</label>
+<textarea id="prompt" placeholder="Describe your movie, characters, scenes and story..."></textarea>
+<div class="options">
+<div><label>Video Style</label><select><option>Realistic 3D Animation</option><option>Cartoon 3D</option><option>Cinematic</option><option>Anime</option></select></div>
+<div><label>Language</label><select><option>Tamil</option><option>English</option><option>Hindi</option><option>Arabic</option><option>All Languages</option></select></div>
+<div><label>Duration</label><select><option>1 Minute</option><option>3 Minutes</option><option>5 Minutes</option><option>10 Minutes</option><option>Custom Duration</option></select></div>
+<div><label>Quality</label><select><option>HD</option><option>Full HD</option><option>4K</option></select></div>
+</div>
+<button onclick="createVideo()">✦ Create My Video</button>
+<div class="note">Target price: ₹10 per video · Actual generation requires an AI service connection.</div>
+</section>
+<section class="features" id="features">
+<div class="feature"><b>🎬 3D Animation</b><small>Animated movie creation</small></div>
+<div class="feature"><b>🎙️ AI Tamil Voice</b><small>Multilingual voice</small></div>
+<div class="feature"><b>🎵 AI Music</b><small>Music and sound effects</small></div>
+<div class="feature"><b>✨ HD / 4K</b><small>Video export options</small></div>
+</section>
+<footer>© 2026 OVA AI · Create Your Imagination</footer>
+<script>
+function createVideo(){
+ const p=document.getElementById('prompt').value.trim();
+ if(!p){alert('Please describe your video first!');return;}
+ alert('OVA AI Studio UI is ready! AI video generation connection will be added next.');
+}
+</script>
+</body>
+</html>
