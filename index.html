@@ -143,5 +143,68 @@ window.generate = async function(){
   }
 }
   </script>
+  
+<section id="soundStudio" style="background:#111a35;padding:25px;border-radius:18px;margin:25px 0;color:white;">
+  <h2>🎵 OVA AI Sound Studio</h2>
+  <p style="color:#aaa;margin:10px 0 20px;">Add music, voice and sound effects to your video.</p>
+
+  <label>🎼 Background Music</label>
+  <select id="musicStyle" style="width:100%;padding:12px;margin:10px 0;background:#202c4b;color:white;border-radius:8px;">
+    <option value="none">No Music</option>
+    <option value="cinematic">Cinematic</option>
+    <option value="happy">Happy</option>
+    <option value="sad">Emotional</option>
+    <option value="action">Action</option>
+    <option value="nature">Nature</option>
+  </select>
+
+  <label>🗣️ Voice Language</label>
+  <select id="voiceLanguage" style="width:100%;padding:12px;margin:10px 0;background:#202c4b;color:white;border-radius:8px;">
+    <option value="Tamil">Tamil</option>
+    <option value="English">English</option>
+    <option value="Hindi">Hindi</option>
+    <option value="Arabic">Arabic</option>
+    <option value="Malayalam">Malayalam</option>
+    <option value="Telugu">Telugu</option>
+    <option value="none">No Voice</option>
+  </select>
+
+  <label>🎙️ Voice-over Text</label>
+  <textarea id="voiceText" placeholder="Enter your voice-over script..." style="width:100%;height:100px;padding:12px;margin:10px 0;background:#202c4b;color:white;border-radius:8px;"></textarea>
+
+  <label>🔊 Sound Effects</label>
+  <select id="soundEffect" style="width:100%;padding:12px;margin:10px 0;background:#202c4b;color:white;border-radius:8px;">
+    <option value="none">No Effects</option>
+    <option value="cinematic">Cinematic Effects</option>
+    <option value="nature">Nature Sounds</option>
+    <option value="action">Action Sounds</option>
+    <option value="magic">Magic Sounds</option>
+  </select>
+
+  <button onclick="prepareSoundStudio()" style="width:100%;padding:15px;background:#8b5cf6;color:white;border:0;border-radius:10px;font-weight:bold;margin-top:15px;">
+    ✨ Apply Sound Settings
+  </button>
+
+  <p id="soundStatus" style="margin-top:15px;color:#b9a5ff;">Ready to create sound.</p>
+</section>
+
+<script>
+function prepareSoundStudio(){
+  const settings = {
+    music: document.getElementById("musicStyle").value,
+    language: document.getElementById("voiceLanguage").value,
+    voiceText: document.getElementById("voiceText").value,
+    effects: document.getElementById("soundEffect").value
+  };
+
+  document.getElementById("soundStatus").textContent =
+    "Sound settings selected! Audio generation integration is the next step.";
+
+  console.log("OVA AI Sound Settings:", settings);
+}
+</script>
+</body>
+</html>
+
 </body>
 </html>
