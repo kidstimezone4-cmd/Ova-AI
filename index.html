@@ -1,559 +1,197 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OVA AI - Advanced Creative Studio</title>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Arial,sans-serif;
-  background:#070914;
-  color:#fff;
-  min-height:100vh;
-}
-header{
-  padding:20px 6%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #252744;
-  background:#0c1024;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-.logo{
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:2px;
-  background:linear-gradient(90deg,#9b7cff,#36d8ff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
+body{font-family:Arial,sans-serif;background:#070914;color:#fff;min-height:100vh}
+header{padding:20px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #252744;background:#0c1024;position:sticky;top:0;z-index:10}
+.logo{font-size:27px;font-weight:900;letter-spacing:2px;background:linear-gradient(90deg,#9b7cff,#36d8ff);-webkit-background-clip:text;color:transparent}
 header span{font-size:12px;color:#aaa}
 .container{max-width:1200px;margin:auto;padding:35px 20px}
 .hero{text-align:center;margin:30px 0 40px}
-.hero h1{
-  font-size:42px;
-  background:linear-gradient(90deg,#fff,#9e8bff,#37d9ff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
+.hero h1{font-size:42px;background:linear-gradient(90deg,#fff,#9e8bff,#37d9ff);-webkit-background-clip:text;color:transparent}
 .hero p{color:#a7acc5;margin-top:12px}
-.panel{
-  background:linear-gradient(145deg,#151a35,#0d1227);
-  border:1px solid #30375e;
-  padding:25px;
-  border-radius:20px;
-  margin-bottom:25px;
-  box-shadow:0 15px 50px #0005;
-}
+.panel{background:linear-gradient(145deg,#151a35,#0d1227);border:1px solid #30375e;padding:25px;border-radius:20px;margin-bottom:25px;box-shadow:0 15px 50px #0005}
 .panel h2{font-size:21px;margin-bottom:20px}
 label{display:block;color:#c7cbea;margin:15px 0 8px;font-size:14px}
-input,textarea,select{
-  width:100%;
-  padding:14px;
-  border-radius:10px;
-  background:#080d20;
-  color:white;
-  border:1px solid #343b64;
-  outline:none;
-  font-size:15px;
-}
+input,textarea,select{width:100%;padding:14px;border-radius:10px;background:#080d20;color:white;border:1px solid #343b64;outline:none;font-size:15px}
 textarea{min-height:110px;resize:vertical}
 input:focus,textarea:focus,select:focus{border-color:#9477ff}
-button{
-  border:0;
-  cursor:pointer;
-  padding:14px 20px;
-  border-radius:10px;
-  font-size:15px;
-  font-weight:bold;
-  color:white;
-  background:linear-gradient(90deg,#744cff,#268cff);
-  transition:.2s;
-}
+button{border:0;cursor:pointer;padding:14px 20px;border-radius:10px;font-size:15px;font-weight:bold;color:white;background:linear-gradient(90deg,#744cff,#268cff);transition:.2s}
 button:hover{filter:brightness(1.15);transform:translateY(-1px)}
 button:disabled{opacity:.5;cursor:not-allowed}
 .generate{width:100%;margin-top:20px;font-size:17px;padding:17px}
 .secondary{background:#252d50}
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-.status{
-  background:#080d20;
-  padding:15px;
-  border-radius:10px;
-  margin-top:18px;
-  color:#9edfff;
-  overflow-wrap:anywhere;
-}
-.progress{
-  height:7px;
-  background:#242a47;
-  border-radius:20px;
-  margin-top:12px;
-  overflow:hidden;
-}
-.progress div{
-  width:0%;
-  height:100%;
-  background:linear-gradient(90deg,#8c5bff,#32dfff);
-  transition:width .5s;
-}
-video{
-  width:100%;
-  border-radius:14px;
-  background:#000;
-  margin-top:15px;
-}
-.download{
-  display:inline-block;
-  margin-top:15px;
-  padding:13px 20px;
-  border-radius:10px;
-  background:#167d63;
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
-}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.status{background:#080d20;padding:15px;border-radius:10px;margin-top:18px;color:#9edfff;overflow-wrap:anywhere}
+.progress{height:7px;background:#242a47;border-radius:20px;margin-top:12px;overflow:hidden}
+.progress div{width:0%;height:100%;background:linear-gradient(90deg,#8c5bff,#32dfff);transition:width .5s}
+video{width:100%;border-radius:14px;background:#000;margin-top:15px}
+.download{display:inline-block;margin-top:15px;padding:13px 20px;border-radius:10px;background:#167d63;color:white;text-decoration:none;font-weight:bold}
 .small{color:#8992b5;font-size:12px;line-height:1.6;margin-top:10px}
 .sound-preview{margin-top:15px}
 .sound-preview audio{width:100%;margin-top:10px}
-footer{
-  text-align:center;
-  padding:30px;
-  border-top:1px solid #252744;
-  color:#777f9e;
-  font-size:13px;
-}
-.hidden{display:none}
-@media(max-width:700px){
-  .grid{grid-template-columns:1fr}
-  .hero h1{font-size:30px}
-  header{padding:16px 5%}
-  .container{padding:20px 14px}
-  .panel{padding:18px}
-}
+footer{text-align:center;padding:30px;border-top:1px solid #252744;color:#777f9e;font-size:13px}
+.hidden{display:none!important}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.hero h1{font-size:30px}header{padding:16px 5%}.container{padding:20px 14px}.panel{padding:18px}}
 </style>
 </head>
-
 <body>
-
-<header>
-  <div class="logo">OVA AI</div>
-  <span>ADVANCED CREATIVE STUDIO</span>
-</header>
-
+<header><div class="logo">OVA AI</div><span>ADVANCED CREATIVE STUDIO</span></header>
 <div class="container">
+<section class="hero"><h1>Create Your Imagination</h1><p>AI Video • Voice • Music • Sound Effects</p></section>
 
-  <section class="hero">
-    <h1>Create Your Imagination</h1>
-    <p>AI Video • Voice • Music • Sound Effects</p>
-  </section>
-
-  <section class="panel">
-    <h2>🎬 AI Video Generator</h2>
-
-    <label>Describe Your Video</label>
-    <textarea id="prompt" placeholder="Example: A luxury sports car driving through a futuristic city at night, cinematic lighting, realistic 3D animation..."></textarea>
-
-    <label>🖼️ Image URL (Optional)</label>
-    <input id="imageUrl" type="url" placeholder="Paste a public image URL for image-to-video">
-
-    <div class="grid">
-      <div>
-        <label>Video Style</label>
-        <select id="videoStyle">
-          <option value="cinematic">Cinematic</option>
-          <option value="realistic">Realistic</option>
-          <option value="3d">3D Animation</option>
-          <option value="2d">2D Animation</option>
-          <option value="fantasy">Fantasy</option>
-          <option value="anime">Anime</option>
-        </select>
-      </div>
-      <div>
-        <label>Quality Preference</label>
-        <select id="quality">
-          <option value="standard">Standard</option>
-          <option value="high">High Quality</option>
-          <option value="4k">4K Preference</option>
-        </select>
-      </div>
-    </div>
-
-    <p class="small">Available video duration and resolution depend on the selected AI model. A 4K selection here is a preference, not a guarantee of 4K output.</p>
-
-    <button class="generate" id="generateBtn" onclick="generateVideo()">
-      ✦ Generate with OVA AI
-    </button>
-
-    <div class="status" id="status">Ready to create your imagination.</div>
-    <div class="progress"><div id="progressBar"></div></div>
-  </section>
-
-  <section class="panel">
-    <h2>🎥 Your Generated Video</h2>
-    <video id="resultVideo" controls playsinline class="hidden"></video>
-    <a id="downloadLink" class="download hidden" target="_blank" rel="noopener">⬇ Download Video</a>
-    <p class="small" id="videoMessage">Your generated video will appear here.</p>
-  </section>
-
-  <section class="panel" id="soundStudio">
-    <h2>🎵 OVA AI Sound Studio</h2>
-
-    <div class="grid">
-      <div>
-        <label>🎼 Background Music Style</label>
-        <select id="musicStyle">
-          <option value="none">No Music</option>
-          <option value="cinematic">Cinematic</option>
-          <option value="happy">Happy</option>
-          <option value="sad">Emotional</option>
-          <option value="action">Action</option>
-          <option value="nature">Nature</option>
-          <option value="romantic">Romantic</option>
-        </select>
-      </div>
-
-      <div>
-        <label>🔊 Sound Effects</label>
-        <select id="soundEffect">
-          <option value="none">No Effects</option>
-          <option value="cinematic">Cinematic Effects</option>
-          <option value="nature">Nature Sounds</option>
-          <option value="action">Action Sounds</option>
-          <option value="magic">Magic Sounds</option>
-          <option value="vehicle">Vehicle Sounds</option>
-        </select>
-      </div>
-    </div>
-
-    <label>🗣️ Voice Language</label>
-    <select id="voiceLanguage">
-      <option value="ta-IN">Tamil</option>
-      <option value="en-US">English</option>
-      <option value="hi-IN">Hindi</option>
-      <option value="ar-SA">Arabic</option>
-      <option value="ml-IN">Malayalam</option>
-      <option value="te-IN">Telugu</option>
-      <option value="fr-FR">French</option>
-      <option value="es-ES">Spanish</option>
-      <option value="de-DE">German</option>
-      <option value="ja-JP">Japanese</option>
-      <option value="ko-KR">Korean</option>
-    </select>
-
-    <label>🎙️ Voice-over Script</label>
-    <textarea id="voiceText" placeholder="Enter your voice-over text here..."></textarea>
-
-    <button class="secondary" onclick="previewVoice()">▶ Preview Voice</button>
-
-    <label>🎵 Upload Background Music (Optional)</label>
-    <input type="file" id="musicFile" accept="audio/*">
-
-    <div class="sound-preview" id="musicPreview"></div>
-
-    <label>🔊 Upload Sound Effect (Optional)</label>
-    <input type="file" id="effectFile" accept="audio/*">
-
-    <div class="sound-preview" id="effectPreview"></div>
-
-    <label>Voice Volume</label>
-    <input type="range" id="voiceVolume" min="0" max="100" value="100">
-
-    <label>Music Volume</label>
-    <input type="range" id="musicVolume" min="0" max="100" value="50">
-
-    <button class="generate" onclick="saveSoundSettings()">
-      ✨ Save Sound Settings
-    </button>
-
-    <div class="status" id="soundStatus">
-      Sound Studio ready.
-    </div>
-
-    <p class="small">
-      Voice preview uses voices available in your browser/device.
-      Uploaded audio can be previewed here. Final MP4 audio mixing
-      requires a separate audio-processing integration.
-    </p>
-  </section>
-
+<section class="panel">
+<h2>🎬 AI Video Generator</h2>
+<label>Describe Your Video</label>
+<textarea id="prompt" placeholder="Example: A luxury sports car driving through a futuristic city at night, cinematic lighting, realistic 3D animation..."></textarea>
+<label>🖼️ Image URL (Optional)</label>
+<input id="imageUrl" type="url" placeholder="Paste a public image URL for image-to-video">
+<div class="grid">
+<div><label>Video Style</label><select id="videoStyle"><option value="cinematic">Cinematic</option><option value="realistic">Realistic</option><option value="3d">3D Animation</option><option value="2d">2D Animation</option><option value="fantasy">Fantasy</option><option value="anime">Anime</option></select></div>
+<div><label>Quality Preference</label><select id="quality"><option value="standard">Standard</option><option value="high">High Quality</option><option value="4k">4K Preference</option></select></div>
 </div>
+<p class="small">Actual duration and resolution depend on the AI model. Quality selections are prompts only and do not guarantee HD or 4K. The connected Replicate API may charge; this page does not bypass provider fees.</p>
+<button class="generate" id="generateBtn" onclick="generateVideo()">✦ Generate with OVA AI</button>
+<div class="status" id="status">Ready to create your imagination.</div>
+<div class="progress"><div id="progressBar"></div></div>
+</section>
 
-<footer>
-  OVA AI © 2026 — Create Your Imagination
-</footer>
+<section class="panel">
+<h2>🎥 Your Generated Video</h2>
+<video id="resultVideo" controls playsinline class="hidden" crossorigin="anonymous"></video>
+<a id="downloadLink" class="download hidden" target="_blank" rel="noopener">⬇ Download Original Video</a>
+<p class="small" id="videoMessage">Your generated video will appear here.</p>
+</section>
+
+<section class="panel" id="soundStudio">
+<h2>🎵 OVA AI Sound Studio</h2>
+<div class="grid">
+<div><label>🎼 Background Music Style</label><select id="musicStyle"><option value="none">No Music</option><option value="cinematic">Cinematic</option><option value="happy">Happy</option><option value="sad">Emotional</option><option value="action">Action</option><option value="nature">Nature</option><option value="romantic">Romantic</option></select></div>
+<div><label>🔊 Sound Effects Type</label><select id="soundEffect"><option value="none">No Effects</option><option value="cinematic">Cinematic Effects</option><option value="nature">Nature Sounds</option><option value="action">Action Sounds</option><option value="magic">Magic Sounds</option><option value="vehicle">Vehicle Sounds</option></select></div>
+</div>
+<label>🗣️ Voice Language (Preview)</label>
+<select id="voiceLanguage"><option value="ta-IN">Tamil</option><option value="en-US">English</option><option value="hi-IN">Hindi</option><option value="ar-SA">Arabic</option><option value="ml-IN">Malayalam</option><option value="te-IN">Telugu</option><option value="fr-FR">French</option><option value="es-ES">Spanish</option><option value="de-DE">German</option><option value="ja-JP">Japanese</option><option value="ko-KR">Korean</option></select>
+<label>🎙️ Voice-over Script (browser preview only)</label>
+<textarea id="voiceText" placeholder="Enter your voice-over text here..."></textarea>
+<button class="secondary" onclick="previewVoice()">▶ Preview Browser Voice</button>
+<label>🎙️ Add recorded voice-over file (included in final mix)</label>
+<input type="file" id="voiceFile" accept="audio/*">
+<div class="sound-preview" id="voicePreview"></div>
+<label>🎵 Upload Background Music (included in final mix)</label>
+<input type="file" id="musicFile" accept="audio/*">
+<div class="sound-preview" id="musicPreview"></div>
+<label>🔊 Upload Sound Effect (included in final mix)</label>
+<input type="file" id="effectFile" accept="audio/*">
+<div class="sound-preview" id="effectPreview"></div>
+<div class="grid">
+<div><label>Voice Volume: <span id="voiceVolLabel">100%</span></label><input type="range" id="voiceVolume" min="0" max="100" value="100"></div>
+<div><label>Music Volume: <span id="musicVolLabel">50%</span></label><input type="range" id="musicVolume" min="0" max="100" value="50"></div>
+</div>
+<label>Effects Volume: <span id="effectVolLabel">70%</span></label>
+<input type="range" id="effectVolume" min="0" max="100" value="70">
+<button class="secondary" onclick="saveSoundSettings()">✨ Save Sound Settings</button>
+<div class="status" id="soundStatus">Sound Studio ready.</div>
+<p class="small">Free local mixing: add your own voice, music and effects files. Browser voice preview is not automatically recorded into the export; record it or provide a voice file. No AI music is generated by these selectors. Export uses WebM when supported by your browser.</p>
+</section>
+
+<section class="panel">
+<h2>🎚️ Final Video + Audio Export</h2>
+<p class="small">Generate a video first, upload audio tracks above, then create one mixed WebM file. Keep this page open while exporting. Your files are processed locally in your browser.</p>
+<button class="generate" id="exportBtn" onclick="exportMixedVideo()">🎬 Export Video with Sound (Free)</button>
+<div class="status" id="exportStatus">Waiting for a generated video.</div>
+<a id="mixedDownload" class="download hidden" download="OVA-AI-video-with-sound.webm">⬇ Download Mixed WebM</a>
+</section>
+</div>
+<footer>OVA AI © 2026 — Create Your Imagination</footer>
 
 <script>
-const API = "https://ova-ai-api.kidstimezone4.workers.dev";
-
-let currentPredictionId = null;
-let pollTimer = null;
-
-function setStatus(message){
-  document.getElementById("status").textContent = message;
-}
-
-function setProgress(value){
-  document.getElementById("progressBar").style.width =
-    Math.min(100, Math.max(0, value)) + "%";
-}
-
+const API="https://ova-ai-api.kidstimezone4.workers.dev";
+let currentPredictionId=null,pollTimer=null;
+function setStatus(m){document.getElementById("status").textContent=m}
+function setProgress(v){document.getElementById("progressBar").style.width=Math.min(100,Math.max(0,v))+"%"}
 async function generateVideo(){
-
-  const prompt = document.getElementById("prompt").value.trim();
-  const imageUrl = document.getElementById("imageUrl").value.trim();
-  const button = document.getElementById("generateBtn");
-  const video = document.getElementById("resultVideo");
-  const download = document.getElementById("downloadLink");
-
-  if(!prompt){
-    setStatus("Please describe your imagination first.");
-    return;
-  }
-
-  if(imageUrl && !/^https?:\/\//i.test(imageUrl)){
-    setStatus("Please enter a valid public image URL.");
-    return;
-  }
-
-  clearTimeout(pollTimer);
-  currentPredictionId = null;
-
-  button.disabled = true;
-  video.classList.add("hidden");
-  download.classList.add("hidden");
-  document.getElementById("videoMessage").textContent =
-    "Your new video is being generated.";
-
-  setProgress(5);
-  setStatus("Connecting to OVA AI...");
-
-  const style = document.getElementById("videoStyle").value;
-  const quality = document.getElementById("quality").value;
-
-  const finalPrompt =
-    prompt + ", " + style + " style, " + quality + " quality";
-
-  try{
-
-    const response = await fetch(API + "/generate",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        prompt:finalPrompt,
-        imageUrl:imageUrl || undefined
-      })
-    });
-
-    const data = await response.json();
-
-    if(!response.ok){
-      throw new Error(data.detail || data.error || "Generation request failed");
-    }
-
-    if(!data.id){
-      throw new Error("Prediction ID was not returned by the API.");
-    }
-
-    currentPredictionId = data.id;
-
-    setStatus("Request submitted! Prediction ID: " + data.id);
-    setProgress(15);
-
-    button.textContent = "⏳ Generating Video...";
-
-    checkVideoStatus(data.id);
-
-  }catch(error){
-
-    setStatus("Error: " + error.message);
-    button.disabled = false;
-    button.textContent = "✦ Generate with OVA AI";
-    setProgress(0);
-
-  }
+ const prompt=document.getElementById("prompt").value.trim(),imageUrl=document.getElementById("imageUrl").value.trim(),button=document.getElementById("generateBtn"),video=document.getElementById("resultVideo"),download=document.getElementById("downloadLink");
+ if(!prompt){setStatus("Please describe your imagination first.");return}
+ if(imageUrl&&!/^https?:\/\//i.test(imageUrl)){setStatus("Please enter a valid public image URL.");return}
+ clearTimeout(pollTimer);currentPredictionId=null;button.disabled=true;video.classList.add("hidden");download.classList.add("hidden");document.getElementById("mixedDownload").classList.add("hidden");document.getElementById("videoMessage").textContent="Your new video is being generated.";setProgress(5);setStatus("Connecting to OVA AI...");
+ const style=document.getElementById("videoStyle").value,quality=document.getElementById("quality").value,finalPrompt=prompt+", "+style+" style, "+quality+" quality";
+ try{
+  const response=await fetch(API+"/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:finalPrompt,imageUrl:imageUrl||undefined})});
+  const data=await response.json();if(!response.ok)throw new Error(data.detail||data.error||"Generation request failed");if(!data.id)throw new Error("Prediction ID was not returned by the API.");
+  currentPredictionId=data.id;setStatus("Request submitted! Prediction ID: "+data.id);setProgress(15);button.textContent="⏳ Generating Video...";checkVideoStatus(data.id);
+ }catch(e){setStatus("Error: "+e.message);finishGeneration();setProgress(0)}
 }
-
 async function checkVideoStatus(id){
-
-  if(id !== currentPredictionId) return;
-
-  try{
-
-    const response = await fetch(
-      API + "/status?id=" + encodeURIComponent(id)
-    );
-
-    const data = await response.json();
-
-    if(!response.ok){
-      throw new Error(data.detail || data.error || "Status check failed");
-    }
-
-    if(data.status === "starting"){
-      setStatus("Starting your video...");
-      setProgress(20);
-    }
-
-    else if(data.status === "processing"){
-      setStatus("OVA AI is generating your video...");
-      setProgress(55);
-    }
-
-    else if(data.status === "succeeded"){
-
-      const output = Array.isArray(data.output)
-        ? data.output[0]
-        : data.output;
-
-      if(!output){
-        throw new Error("Video completed, but no output URL was returned.");
-      }
-
-      const video = document.getElementById("resultVideo");
-      const download = document.getElementById("downloadLink");
-
-      video.src = output;
-      video.classList.remove("hidden");
-
-      download.href = output;
-      download.classList.remove("hidden");
-
-      document.getElementById("videoMessage").textContent =
-        "Your video is ready!";
-
-      setStatus("✅ Video generated successfully!");
-      setProgress(100);
-
-      finishGeneration();
-      return;
-    }
-
-    else if(data.status === "failed" || data.status === "canceled"){
-      throw new Error(data.error || "Video generation " + data.status);
-    }
-
-    pollTimer = setTimeout(function(){
-      checkVideoStatus(id);
-    },5000);
-
-  }catch(error){
-
-    setStatus("Error: " + error.message);
-    finishGeneration();
-
-  }
+ if(id!==currentPredictionId)return;
+ try{
+  const response=await fetch(API+"/status?id="+encodeURIComponent(id)),data=await response.json();if(!response.ok)throw new Error(data.detail||data.error||"Status check failed");
+  if(data.status==="starting"){setStatus("Starting your video...");setProgress(20)}
+  else if(data.status==="processing"){setStatus("OVA AI is generating your video...");setProgress(55)}
+  else if(data.status==="succeeded"){
+   const output=Array.isArray(data.output)?data.output[0]:data.output;if(!output)throw new Error("Video completed, but no output URL was returned.");
+   const v=document.getElementById("resultVideo"),d=document.getElementById("downloadLink");v.crossOrigin="anonymous";v.src=output;v.classList.remove("hidden");d.href=output;d.classList.remove("hidden");document.getElementById("videoMessage").textContent="Your video is ready!";setStatus("✅ Video generated successfully!");setProgress(100);finishGeneration();document.getElementById("exportStatus").textContent="Video ready. Add your audio tracks and export.";return;
+  }else if(data.status==="failed"||data.status==="canceled")throw new Error(data.error||"Video generation "+data.status);
+  pollTimer=setTimeout(()=>checkVideoStatus(id),5000);
+ }catch(e){setStatus("Error: "+e.message);finishGeneration()}
 }
-
-function finishGeneration(){
-  document.getElementById("generateBtn").disabled = false;
-  document.getElementById("generateBtn").textContent =
-    "✦ Generate with OVA AI";
-}
-
+function finishGeneration(){const b=document.getElementById("generateBtn");b.disabled=false;b.textContent="✦ Generate with OVA AI"}
 function previewVoice(){
-
-  const text = document.getElementById("voiceText").value.trim();
-  const language = document.getElementById("voiceLanguage").value;
-
-  if(!text){
-    document.getElementById("soundStatus").textContent =
-      "Please enter voice-over text first.";
-    return;
-  }
-
-  if(!("speechSynthesis" in window)){
-    document.getElementById("soundStatus").textContent =
-      "Voice preview is not supported in this browser.";
-    return;
-  }
-
-  speechSynthesis.cancel();
-
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = language;
-
-  const voices = speechSynthesis.getVoices();
-  const selectedVoice = voices.find(v =>
-    v.lang.toLowerCase().startsWith(language.split("-")[0].toLowerCase())
-  );
-
-  if(selectedVoice){
-    utterance.voice = selectedVoice;
-  }
-
-  utterance.onstart = () => {
-    document.getElementById("soundStatus").textContent =
-      "Playing voice preview...";
-  };
-
-  utterance.onend = () => {
-    document.getElementById("soundStatus").textContent =
-      "Voice preview finished.";
-  };
-
-  utterance.onerror = () => {
-    document.getElementById("soundStatus").textContent =
-      "Voice preview could not be played.";
-  };
-
-  speechSynthesis.speak(utterance);
+ const text=document.getElementById("voiceText").value.trim(),lang=document.getElementById("voiceLanguage").value;if(!text){document.getElementById("soundStatus").textContent="Please enter voice-over text first.";return}
+ if(!("speechSynthesis"in window)){document.getElementById("soundStatus").textContent="Voice preview is not supported in this browser.";return}
+ speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;const voices=speechSynthesis.getVoices(),voice=voices.find(v=>v.lang.toLowerCase().startsWith(lang.split("-")[0].toLowerCase()));if(voice)u.voice=voice;
+ u.onstart=()=>document.getElementById("soundStatus").textContent="Playing browser voice preview...";u.onend=()=>document.getElementById("soundStatus").textContent="Voice preview finished.";u.onerror=()=>document.getElementById("soundStatus").textContent="Voice preview could not be played.";speechSynthesis.speak(u);
 }
-
-function previewAudio(inputId, previewId){
-
-  const input = document.getElementById(inputId);
-  const preview = document.getElementById(previewId);
-
-  preview.innerHTML = "";
-
-  if(!input.files || !input.files[0]) return;
-
-  const url = URL.createObjectURL(input.files[0]);
-
-  const audio = document.createElement("audio");
-  audio.controls = true;
-  audio.src = url;
-
-  preview.appendChild(audio);
+const audioUrls=[];
+function previewAudio(inputId,previewId){
+ const input=document.getElementById(inputId),preview=document.getElementById(previewId);preview.innerHTML="";if(!input.files||!input.files[0])return;
+ const url=URL.createObjectURL(input.files[0]);audioUrls.push(url);const a=document.createElement("audio");a.controls=true;a.src=url;preview.appendChild(a);
 }
+["musicFile","effectFile","voiceFile"].forEach(id=>document.getElementById(id).addEventListener("change",()=>previewAudio(id,id==="musicFile"?"musicPreview":id==="effectFile"?"effectPreview":"voicePreview")));
+function saveSoundSettings(){document.getElementById("soundStatus").textContent="Sound settings saved for this page session."}
+["voiceVolume","musicVolume","effectVolume"].forEach(id=>document.getElementById(id).addEventListener("input",()=>{const target=id==="voiceVolume"?"voiceVolLabel":id==="musicVolume"?"musicVolLabel":"effectVolLabel";document.getElementById(target).textContent=document.getElementById(id).value+"%"}));
 
-document.getElementById("musicFile").addEventListener("change",()=>{
-  previewAudio("musicFile","musicPreview");
-});
-
-document.getElementById("effectFile").addEventListener("change",()=>{
-  previewAudio("effectFile","effectPreview");
-});
-
-function saveSoundSettings(){
-
-  const settings = {
-    music:document.getElementById("musicStyle").value,
-    effects:document.getElementById("soundEffect").value,
-    language:document.getElementById("voiceLanguage").value,
-    voiceText:document.getElementById("voiceText").value,
-    voiceVolume:document.getElementById("voiceVolume").value,
-    musicVolume:document.getElementById("musicVolume").value,
-    musicFile:document.getElementById("musicFile").files[0]?.name || "",
-    effectFile:document.getElementById("effectFile").files[0]?.name || ""
+async function exportMixedVideo(){
+ const video=document.getElementById("resultVideo"),btn=document.getElementById("exportBtn"),status=document.getElementById("exportStatus"),link=document.getElementById("mixedDownload");
+ if(!video.src||video.readyState<2){status.textContent="Please generate and load a video first.";return}
+ if(!video.captureStream&&!video.mozCaptureStream){status.textContent="This browser does not support video capture. Please use an up-to-date Chrome or Edge desktop browser.";return}
+ const musicFile=document.getElementById("musicFile").files[0],effectFile=document.getElementById("effectFile").files[0],voiceFile=document.getElementById("voiceFile").files[0];
+ if(!musicFile&&!effectFile&&!voiceFile){status.textContent="Please upload at least one audio file (voice, music or sound effect) first.";return}
+ const AudioCtx=window.AudioContext||window.webkitAudioContext;if(!AudioCtx){status.textContent="Web Audio is not supported in this browser.";return}
+ btn.disabled=true;link.classList.add("hidden");status.textContent="Preparing audio tracks...";
+ let ctx,recorder,chunks=[],rafTimer;
+ try{
+  ctx=new AudioCtx();await ctx.resume();const destination=ctx.createMediaStreamDestination();
+  async function addTrack(file,volume,loop){
+   if(!file)return null;
+   const bytes=await file.arrayBuffer(),buffer=await ctx.decodeAudioData(bytes);
+   const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer;source.loop=!!loop;gain.gain.value=Number(volume)/100;source.connect(gain);gain.connect(destination);return source;
+  }
+  const music=await addTrack(musicFile,document.getElementById("musicVolume").value,true);
+  const effect=await addTrack(effectFile,document.getElementById("effectVolume").value,false);
+  const voice=await addTrack(voiceFile,document.getElementById("voiceVolume").value,false);
+  const videoStream=(video.captureStream||video.mozCaptureStream).call(video);
+  const mixedStream=new MediaStream();videoStream.getVideoTracks().forEach(t=>mixedStream.addTrack(t));destination.stream.getAudioTracks().forEach(t=>mixedStream.addTrack(t));
+  if(!mixedStream.getVideoTracks().length)throw new Error("No video track could be captured.");
+  const mimeCandidates=["video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm"];
+  const mime=mimeCandidates.find(t=>MediaRecorder.isTypeSupported(t));if(!mime)throw new Error("WebM recording is not supported by this browser.");
+  recorder=new MediaRecorder(mixedStream,{mimeType:mime,videoBitsPerSecond:8000000,audioBitsPerSecond:192000});
+  recorder.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+  recorder.onerror=e=>{status.textContent="Recorder error: "+(e.error?.message||"unknown error")};
+  recorder.onstop=()=>{
+   clearInterval(rafTimer);const blob=new Blob(chunks,{type:mime}),url=URL.createObjectURL(blob);link.href=url;link.classList.remove("hidden");status.textContent="✅ Mixed WebM is ready. Download it below.";btn.disabled=false;video.pause();videoStream.getTracks().forEach(t=>t.stop());ctx.close().catch(()=>{});
   };
-
-  document.getElementById("soundStatus").textContent =
-    "Sound settings saved for this session.";
-
-  console.log("OVA AI Sound Settings:",settings);
+  video.pause();video.currentTime=0;await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error("Video could not start. Check whether the source video is playable.")),10000);video.oncanplay=()=>{clearTimeout(timer);resolve()};video.load()});
+  recorder.start(1000);if(music)music.start(0);if(effect)effect.start(0);if(voice)voice.start(0);
+  status.textContent="Recording and mixing audio with video... Please keep this tab open.";
+  video.onended=()=>{if(recorder&&recorder.state!=="inactive")recorder.stop()};
+  await video.play();
+  rafTimer=setInterval(()=>{if(video.ended&&recorder.state!=="inactive")recorder.stop()},500);
+ }catch(e){status.textContent="Export failed: "+e.message+" — Try Chrome/Edge and check that the video plays.";btn.disabled=false;if(recorder&&recorder.state!=="inactive")recorder.stop();if(ctx)ctx.close().catch(()=>{})}
 }
 </script>
-
 </body>
 </html>
