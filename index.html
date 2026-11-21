@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create AI videos with OVA AI. Turn your imagination into cinematic, realistic, 2D and 3D videos with voice, music and sound effects.">
+<meta name="theme-color" content="#070914">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OVA AI — Create Your Imagination">
+<meta property="og:description" content="Create AI videos with voice, music and cinematic effects. Try OVA AI.">
+<meta property="og:url" content="https://kidstimezone4-cmd.github.io/Ova-AI/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OVA AI — Create Your Imagination">
+<meta name="twitter:description" content="Create AI videos with voice, music and cinematic effects. Try OVA AI.">
 <title>OVA AI - Advanced Creative Studio</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -37,12 +46,29 @@ video{width:100%;border-radius:14px;background:#000;margin-top:15px}
 footer{text-align:center;padding:30px;border-top:1px solid #252744;color:#777f9e;font-size:13px}
 .hidden{display:none!important}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.hero h1{font-size:30px}header{padding:16px 5%}.container{padding:20px 14px}.panel{padding:18px}}
+
+.hero-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;text-align:left;margin:24px 0 36px}
+.hero-copy h1{font-size:clamp(34px,5vw,58px);line-height:1.08}
+.hero-copy p{font-size:17px;line-height:1.7;max-width:540px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.hero-demo{position:relative;border:1px solid #3b4270;border-radius:20px;overflow:hidden;background:#11172c;box-shadow:0 18px 55px #0008}
+.hero-demo video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;margin:0}
+.section-title{text-align:center;font-size:clamp(25px,4vw,36px);margin:48px 0 20px}
+.feature-grid,.price-grid,.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.info-card{background:#111831;border:1px solid #30375e;padding:20px;border-radius:16px}
+.info-card h3{margin-bottom:9px;color:#e7e1ff}.info-card p{color:#a7acc5;line-height:1.6;font-size:14px}
+.price{font-size:30px;font-weight:800;margin:12px 0}.faq details{background:#111831;border:1px solid #30375e;border-radius:12px;padding:16px;margin:10px 0}.faq summary{cursor:pointer;font-weight:bold}.faq p{color:#a7acc5;margin-top:12px;line-height:1.6}
+.lang-btn{padding:9px 13px;background:#252d50}
+@media(max-width:760px){.hero-wrap{grid-template-columns:1fr;text-align:center}.hero-copy p{margin:auto}.hero-actions{justify-content:center}.feature-grid,.price-grid,.gallery-grid{grid-template-columns:1fr}.hero-demo{order:-1}}
 </style>
 </head>
 <body>
-<header><div class="logo">OVA AI</div><span>ADVANCED CREATIVE STUDIO</span></header>
+<header><div class="logo">OVA AI</div><div style="display:flex;align-items:center;gap:12px"><span>ADVANCED CREATIVE STUDIO</span><button class="lang-btn" id="langToggle" type="button">தமிழ்</button></div></header>
 <div class="container">
-<section class="hero"><h1>Create Your Imagination</h1><p>AI Video • Voice • Music • Sound Effects</p></section>
+<section class="hero-wrap">
+<div class="hero-copy"><h1>Create Your Imagination</h1><p id="heroDesc">Turn a simple idea into an AI video with cinematic visuals, voice, music and sound effects.</p><div class="hero-actions"><button type="button" onclick="document.getElementById('prompt').scrollIntoView({behavior:'smooth'})">✦ Try Free</button><button type="button" class="secondary" onclick="document.getElementById('examples').scrollIntoView({behavior:'smooth'})">View Examples</button></div><p class="small">AI Video • Voice • Music • Sound Effects</p></div>
+<div class="hero-demo"><video id="heroDemo" autoplay muted loop playsinline preload="none" poster="" aria-label="OVA AI demo video"><source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4"></video></div>
+</section>
 
 <section class="panel">
 <section class="panel" id="accountPanel">
@@ -115,7 +141,29 @@ footer{text-align:center;padding:30px;border-top:1px solid #252744;color:#777f9e
 <a id="mixedDownload" class="download hidden" download="OVA-AI-video-with-sound.webm">⬇ Download Mixed WebM</a>
 </section>
 </div>
-<footer>OVA AI © 2026 — Create Your Imagination</footer>
+
+<section id="examples">
+<h2 class="section-title">Create More with OVA AI</h2>
+<div class="feature-grid">
+<div class="info-card"><h3>🎬 Cinematic Videos</h3><p>Bring stories and ideas to life with cinematic AI video prompts.</p></div>
+<div class="info-card"><h3>🪄 2D & 3D Styles</h3><p>Explore animation, realistic, fantasy and creative visual styles.</p></div>
+<div class="info-card"><h3>🎙️ Voice & Sound</h3><p>Add voice-over, background music and sound effects to your video workflow.</p></div>
+</div>
+<h2 class="section-title">Plans & Pricing</h2>
+<div class="price-grid">
+<div class="info-card"><h3>Free Creator</h3><div class="price">Free</div><p>Try the studio with available free credits. Free plan exports may include OVA AI branding once watermark export is enabled.</p></div>
+<div class="info-card"><h3>Creator</h3><div class="price">Coming soon</div><p>More credits, watermark-free export and creator tools. Final price will be shown before purchase.</p></div>
+<div class="info-card"><h3>Studio</h3><div class="price">Coming soon</div><p>Higher usage limits and advanced workflow options, subject to provider availability.</p></div>
+</div>
+<h2 class="section-title">Frequently Asked Questions</h2>
+<div class="faq">
+<details><summary>Is OVA AI free to try?</summary><p>You can try the available free credits. AI video generation may still depend on paid third-party provider usage and available credits.</p></details>
+<details><summary>Can I create 2D, 3D and 4K videos?</summary><p>2D and 3D styles are prompt options. Resolution depends on the connected model; selecting 4K does not guarantee 4K output.</p></details>
+<details><summary>Can I add Tamil voice and music?</summary><p>The Sound Studio supports browser voice preview and uploading your own voice, music and sound-effect files. Availability of voices depends on your device and browser.</p></details>
+<details><summary>Can I use OVA AI on mobile?</summary><p>Yes. The interface is responsive and works in modern mobile browsers. Video export features may vary by device.</p></details>
+</div>
+</section>
+<footer>OVA AI © 2026 — Create Your Imagination · <a href="https://kidstimezone4-cmd.github.io/Ova-AI/" style="color:#9e8bff">Visit OVA AI</a></footer>
 
 <script>
 const API="https://ova-ai-api.kidstimezone4.workers.dev";
@@ -201,6 +249,23 @@ async function exportMixedVideo(){
   rafTimer=setInterval(()=>{if(video.ended&&recorder.state!=="inactive")recorder.stop()},500);
  }catch(e){status.textContent="Export failed: "+e.message+" — Try Chrome/Edge and check that the video plays.";btn.disabled=false;if(recorder&&recorder.state!=="inactive")recorder.stop();if(ctx)ctx.close().catch(()=>{})}
 }
+
+const languageCopy = {
+ en:{desc:"Turn a simple idea into an AI video with cinematic visuals, voice, music and sound effects.",try:"✦ Try Free",examples:"View Examples"},
+ ta:{desc:"உங்கள் சிந்தனையை சினிமா காட்சிகள், குரல், இசை மற்றும் ஒலி விளைவுகளுடன் AI வீடியோவாக உருவாக்குங்கள்.",try:"✦ இலவசமாக முயற்சி",examples:"மாதிரி வீடியோக்கள்"}
+};
+let ovaLang="en";
+document.getElementById("langToggle")?.addEventListener("click",()=>{
+ ovaLang=ovaLang==="en"?"ta":"en";
+ const c=languageCopy[ovaLang];
+ document.getElementById("heroDesc").textContent=c.desc;
+ document.querySelector(".hero-actions button").textContent=c.try;
+ document.querySelectorAll(".hero-actions button")[1].textContent=c.examples;
+ document.getElementById("langToggle").textContent=ovaLang==="en"?"தமிழ்":"English";
+ document.documentElement.lang=ovaLang==="ta"?"ta":"en";
+});
+const heroDemo=document.getElementById("heroDemo");
+heroDemo?.addEventListener("timeupdate",()=>{if(heroDemo.currentTime>=15){heroDemo.currentTime=0;heroDemo.play().catch(()=>{});}});
 </script>
 
 <script type="module">
