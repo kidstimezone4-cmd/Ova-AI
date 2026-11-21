@@ -106,12 +106,38 @@ footer{text-align:center;padding:40px;color:#77748a;border-top:1px solid #ffffff
 </section>
 <footer id="about">OVA AI · CREATE YOUR IMAGINATION<br><br>© 2026 OVA AI Studio · *Actual AI generation requires a connected AI service.</footer>
 <script>
-function generate(){
-const p=document.getElementById('prompt').value.trim();
-const s=document.getElementById('status');
-if(!p){s.textContent="Please describe your imagination first.";return;}
-s.textContent="Your creative prompt is ready. Connect an AI video/image provider to enable actual generation.";
+async function generate(){
+  const p = document.getElementById('prompt').value.trim();
+  const s = document.getElementById('status');
+
+  if(!p){
+    s.textContent = "Please describe your imagination first.";
+    return;
+  }
+
+  s.textContent = "Connecting to OVA AI...";
+
+  try {
+    const response = await fetch(
+      "https://ova-ai-api.kidstimezone4.workers.dev/generate",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt: p })
+      }
+    );
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(data.detail || data.error || "API request failed");
+    }
+
+    s.textContent = "OVA AI request submitted! Prediction ID: " + data.id;
+
+  } catch(error) {
+    s.textContent = "Error: " + error.message;
+  }
 }
-</script>
-</body>
-</html>
