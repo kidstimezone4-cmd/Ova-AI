@@ -4,183 +4,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OVA AI - Create Your Imagination</title>
+<title>OVA AI | Future Creative Studio</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#08070d;color:#fff;font-family:Arial,sans-serif}
-header{height:75px;padding:15px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #392b20;background:#100d12}
-.logo{font-size:27px;font-weight:900;color:#e9bd63;letter-spacing:3px}
-.logo span{color:#a77aff}
-nav a{color:#ddd;text-decoration:none;margin-left:20px;font-size:14px}
-.hero{text-align:center;padding:65px 20px 45px;background:radial-gradient(ellipse at 50% 10%,#492568 0%,#171020 40%,#08070d 80%)}
-.hero h1{font-size:clamp(36px,7vw,65px);color:#f3d28b;margin-bottom:15px}
-.hero h1 span{color:#b68aff}
-.hero p{color:#c6b9cf;font-size:16px;line-height:1.7}
-.tag{display:inline-block;border:1px solid #b38a4c;color:#eacb8b;padding:8px 18px;border-radius:30px;margin-bottom:22px}
-.container{max-width:1100px;margin:auto;padding:25px 18px}
-.section-title{font-size:24px;color:#f0d18c;margin-bottom:20px}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px}
-.tool{background:linear-gradient(145deg,#201629,#100e16);border:1px solid #49324e;border-radius:15px;padding:22px 12px;text-align:center;cursor:pointer;transition:.25s}
-.tool:hover,.tool.active{border-color:#d5a64e;transform:translateY(-4px);box-shadow:0 5px 25px #9d65d333}
-.tool .ico{font-size:32px;margin-bottom:12px}
-.tool h3{font-size:15px;color:#e9c77d}
-.tool p{font-size:11px;color:#a99cad;margin-top:7px}
-.studio{margin-top:35px;background:#15111b;border:1px solid #59412e;border-radius:20px;padding:25px}
-.studio h2{color:#e9c77d;margin-bottom:20px}
-label{display:block;color:#d7c5dc;margin:17px 0 9px;font-size:14px}
-textarea,select,input{width:100%;background:#09080e;color:white;border:1px solid #514052;border-radius:10px;padding:13px;font-size:14px}
-textarea{min-height:125px;resize:vertical}
-select{cursor:pointer}
-.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
-button{background:linear-gradient(100deg,#a77b36,#f1d18b);color:#160f0a;border:0;padding:15px 24px;border-radius:10px;font-weight:bold;cursor:pointer}
-button:hover{filter:brightness(1.15)}
-.generate{width:100%;margin-top:23px;font-size:16px}
-#status{margin-top:15px;color:#e9c77d;text-align:center;line-height:1.6}
-.upload{border:1px dashed #a77b52;border-radius:12px;padding:20px;text-align:center}
-.upload input{border:0}
-#preview{max-width:100%;max-height:220px;margin-top:12px;border-radius:10px}
-footer{text-align:center;padding:35px;color:#93859b;border-top:1px solid #382a3c;margin-top:40px}
-@media(max-width:600px){nav a{margin-left:8px;font-size:11px}.studio{padding:17px}.hero{padding-top:45px}}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8bd70;--purple:#a66cff;--bg:#080810;--panel:#13121e;--muted:#9995a9}
+body{background:var(--bg);color:white;font-family:Arial,sans-serif;min-height:100vh}
+button,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:#0e0d16;border-right:1px solid #292438;padding:25px 17px;z-index:5;overflow-y:auto}
+.logo{font-size:29px;font-weight:900;letter-spacing:3px;color:var(--gold);padding:5px 10px 30px}
+.logo span{color:var(--purple)}
+.side-label{font-size:10px;letter-spacing:2px;color:#777184;margin:22px 10px 12px}
+.nav{display:flex;align-items:center;gap:13px;padding:13px 12px;margin:5px 0;border-radius:11px;color:#bcb6ca;font-size:14px;cursor:pointer;border:1px solid transparent}
+.nav:hover,.nav.active{background:linear-gradient(100deg,#31213e,#171422);border-color:#624b75;color:#f1ce8e}
+.nav i{font-style:normal;font-size:19px;width:24px}
+.sidebar-bottom{margin-top:35px;border:1px solid #44364c;padding:15px;border-radius:12px;background:#171321}
+.sidebar-bottom small{color:var(--muted)}
+.main{margin-left:245px;width:calc(100% - 245px);padding:25px 4% 50px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.topbar h3{font-size:15px;color:#d8d0e3;font-weight:500}
+.profile{border:1px solid #493950;border-radius:30px;padding:9px 16px;color:var(--gold);font-size:12px}
+.hero{position:relative;overflow:hidden;border:1px solid #56422f;border-radius:22px;padding:45px 38px;background:radial-gradient(ellipse at 80% 45%,#56317c 0%,#241432 28%,#11101c 65%,#0e0d16 100%);min-height:300px;display:flex;align-items:center}
+.hero:before{content:"";position:absolute;width:280px;height:280px;border:2px solid #e5b75b88;border-radius:50%;right:9%;top:8px;box-shadow:0 0 35px #a66cff66,inset 0 0 40px #a66cff55;animation:spin 22s linear infinite}
+.hero:after{content:"✦";position:absolute;right:22%;top:40%;font-size:100px;color:#f2d38e;text-shadow:0 0 35px #b57aff;animation:pulse 3s infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(1.15);opacity:.6}}
+.hero-content{position:relative;z-index:2;max-width:570px}
+.tag{color:var(--gold);font-size:11px;letter-spacing:3px;margin-bottom:18px}
+.hero h1{font-size:clamp(35px,5vw,59px);line-height:1.08;margin-bottom:16px}
+.gradient{background:linear-gradient(90deg,#f2d48d,#b68aff);color:transparent;background-clip:text}
+.hero p{color:#c5bdd2;line-height:1.7;font-size:14px}
+.hero-btn{margin-top:24px;background:linear-gradient(100deg,#b98a42,#f1d28c);border:0;padding:13px 23px;border-radius:9px;font-weight:bold;color:#17101a}
+.section{margin-top:35px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.section-head h2{font-size:20px}
+.section-head span{font-size:11px;color:var(--gold)}
+.tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.tool{background:linear-gradient(145deg,#1b1828,#100f18);border:1px solid #3b304b;border-radius:15px;padding:21px 15px;cursor:pointer;transition:.25s}
+.tool:hover,.tool.active{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 8px 28px #a66cff20}
+.tool-icon{font-size:30px;margin-bottom:14px}
+.tool h3{font-size:14px;color:#f1d18d;margin-bottom:7px}
+.tool p{font-size:11px;color:#aaa2b8;line-height:1.5}
+.studio{margin-top:38px;background:linear-gradient(145deg,#191523,#0f0e17);border:1px solid #4b3c54;border-radius:19px;padding:26px}
+.studio h2{font-size:21px;margin-bottom:8px}
+.subtitle{font-size:12px;color:var(--muted);margin-bottom:23px}
+label{display:block;color:#d9cde2;font-size:12px;margin:17px 0 9px}
+textarea,select{width:100%;background:#0a0911;border:1px solid #44364d;border-radius:9px;color:white;padding:13px;outline:none}
+textarea{min-height:120px;resize:vertical}
+select:focus,textarea:focus{border-color:var(--purple)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.upload{border:1px dashed #9d7caa;padding:18px;border-radius:10px;background:#0d0b15}
+.upload input{width:100%;color:#bbb;font-size:12px}
+#preview{max-width:100%;max-height:160px;margin-top:12px;border-radius:8px}
+.generate{width:100%;margin-top:23px;padding:16px;border:0;border-radius:10px;background:linear-gradient(100deg,#9560d9,#e8bd70);color:#130d19;font-weight:900;font-size:15px}
+#status{margin-top:15px;text-align:center;color:var(--gold);font-size:12px;line-height:1.6}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.gallery-card{background:#15121e;border:1px solid #382e43;border-radius:12px;padding:20px;text-align:center;color:#c5b6d3}
+.gallery-card div{font-size:28px;margin-bottom:10px}
+footer{text-align:center;color:#766d80;font-size:11px;padding:35px}
+.mobile-head{display:none}
+@media(max-width:900px){.tools{grid-template-columns:repeat(2,1fr)}.main{padding:20px 3%}}
+@media(max-width:650px){
+.sidebar{display:none}
+.main{margin:0;width:100%;padding:15px}
+.mobile-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.topbar{display:none}
+.hero{padding:35px 20px;min-height:310px}
+.hero:before{right:-90px;opacity:.6}
+.hero:after{right:5%;font-size:65px}
+.hero-content{max-width:90%}
+.grid{grid-template-columns:repeat(2,1fr)}
+.gallery{grid-template-columns:repeat(2,1fr)}
+.studio{padding:18px}
+}
 </style>
 </head>
 <body>
-<header>
+<div class="app">
+<aside class="sidebar">
 <div class="logo">OVA <span>AI</span></div>
-<nav>
-<a href="#home">Home</a>
-<a href="#tools">Tools</a>
-<a href="#studio">Studio</a>
-</nav>
-</header>
+<div class="side-label">WORKSPACE</div>
+<div class="nav active" data-target="home"><i>⌂</i> Home</div>
+<div class="nav" data-target="tools"><i>✧</i> AI Tools</div>
+<div class="nav" data-target="studio"><i>◈</i> Creation Studio</div>
+<div class="side-label">CREATIVE LAB</div>
+<div class="nav" data-mode="Text to Video"><i>🎬</i> Video Generator</div>
+<div class="nav" data-mode="AI Image"><i>🖼️</i> Image Generator</div>
+<div class="nav" data-mode="AI Voice"><i>🎙️</i> Voice Studio</div>
+<div class="nav" data-mode="AI Music"><i>♫</i> Music Studio</div>
+<div class="nav" data-target="gallery"><i>▦</i> My Projects</div>
+<div class="sidebar-bottom">
+<div style="color:var(--gold);margin-bottom:8px">✦ OVA AI PRO</div>
+<small>Your imagination has no boundaries.</small>
+</div>
+</aside>
 
-<section class="hero" id="home">
-<div class="tag">✦ NEXT GENERATION AI STUDIO ✦</div>
-<h1>CREATE YOUR <span>IMAGINATION</span></h1>
-<p>Turn your imagination into extraordinary videos, images and animations.<br>One creative studio. Endless possibilities.</p>
-</section>
-
-<main class="container" id="tools">
-<h2 class="section-title">✦ AI CREATIVE TOOLS</h2>
-<div class="tools">
-<div class="tool active" data-mode="Text to Video"><div class="ico">🎬</div><h3>Text to Video</h3><p>Create videos from prompts</p></div>
-<div class="tool" data-mode="Image to Video"><div class="ico">🖼️</div><h3>Image to Video</h3><p>Animate your images</p></div>
-<div class="tool" data-mode="AI Image"><div class="ico">🎨</div><h3>AI Image</h3><p>Create beautiful images</p></div>
-<div class="tool" data-mode="3D Animation"><div class="ico">🌌</div><h3>3D Animation</h3><p>Explore 3D creativity</p></div>
-<div class="tool" data-mode="AI Voice"><div class="ico">🎙️</div><h3>AI Voice</h3><p>Generate voiceovers</p></div>
-<div class="tool" data-mode="AI Music"><div class="ico">🎵</div><h3>AI Music</h3><p>Create soundtracks</p></div>
-<div class="tool" data-mode="Video Effects"><div class="ico">✨</div><h3>Video Effects</h3><p>Enhance your videos</p></div>
-<div class="tool" data-mode="AI Story"><div class="ico">📖</div><h3>AI Story</h3><p>Build cinematic stories</p></div>
+<main class="main">
+<div class="mobile-head">
+<div class="logo">OVA <span>AI</span></div>
+<div class="profile">CREATOR</div>
+</div>
+<div class="topbar">
+<h3>Welcome to your creative universe</h3>
+<div class="profile">✦ CREATOR STUDIO</div>
 </div>
 
-<section class="studio" id="studio">
-<h2>✦ OVA AI CREATION STUDIO</h2>
-<label>Selected Tool</label>
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="tag">✦ THE FUTURE OF CREATIVITY ✦</div>
+<h1>IMAGINE.<br><span class="gradient">CREATE. INSPIRE.</span></h1>
+<p>Welcome to OVA AI. Transform your ideas into cinematic videos, stunning images, animations and sound.</p>
+<button class="hero-btn" onclick="document.getElementById('studio').scrollIntoView({behavior:'smooth'})">✦ ENTER CREATION STUDIO →</button>
+</div>
+</section>
+
+<section class="section" id="tools">
+<div class="section-head"><h2>✦ Creative Universe</h2><span>EXPLORE AI TOOLS</span></div>
+<div class="tools">
+<div class="tool active" data-mode="Text to Video"><div class="tool-icon">🎬</div><h3>Text to Video</h3><p>Turn your ideas into cinematic videos</p></div>
+<div class="tool" data-mode="Image to Video"><div class="tool-icon">🌌</div><h3>Image to Video</h3><p>Bring still images to life</p></div>
+<div class="tool" data-mode="AI Image"><div class="tool-icon">🎨</div><h3>AI Image</h3><p>Create stunning artwork</p></div>
+<div class="tool" data-mode="3D Animation"><div class="tool-icon">💎</div><h3>3D Animation</h3><p>Explore a new dimension</p></div>
+<div class="tool" data-mode="AI Voice"><div class="tool-icon">🎙️</div><h3>AI Voice</h3><p>Bring stories to life</p></div>
+<div class="tool" data-mode="AI Music"><div class="tool-icon">🎵</div><h3>AI Music</h3><p>Create original soundtracks</p></div>
+<div class="tool" data-mode="Video Effects"><div class="tool-icon">✨</div><h3>Visual Effects</h3><p>Enhance every scene</p></div>
+<div class="tool" data-mode="AI Story"><div class="tool-icon">📖</div><h3>AI Story</h3><p>Build cinematic stories</p></div>
+</div>
+</section>
+
+<section class="studio section" id="studio">
+<h2>◈ Creation Studio</h2>
+<p class="subtitle">Your ideas. Your style. Your creative universe.</p>
+
+<label>Choose your AI tool</label>
 <select id="mode">
-<option>Text to Video</option>
-<option>Image to Video</option>
-<option>AI Image</option>
-<option>3D Animation</option>
-<option>AI Voice</option>
-<option>AI Music</option>
-<option>Video Effects</option>
-<option>AI Story</option>
+<option>Text to Video</option><option>Image to Video</option>
+<option>AI Image</option><option>3D Animation</option>
+<option>AI Voice</option><option>AI Music</option>
+<option>Video Effects</option><option>AI Story</option>
 </select>
 
-<label>Your Creative Prompt</label>
-<textarea id="prompt" placeholder="Describe your imagination..."></textarea>
+<label>Describe your imagination</label>
+<textarea id="prompt" placeholder="Describe your scene, characters, camera movement, atmosphere and creative vision..."></textarea>
 
-<label>Upload Image (optional)</label>
+<label>Upload your reference image</label>
 <div class="upload">
 <input type="file" id="image" accept="image/*">
 <img id="preview" hidden>
 </div>
 
-<div class="options">
-<div>
-<label>Language</label>
-<select id="language">
-<option>English</option><option>Tamil</option><option>Hindi</option>
-<option>Arabic</option><option>All Languages</option>
-</select>
+<div class="grid">
+<div><label>Language</label>
+<select id="language"><option>English</option><option>Tamil</option><option>Hindi</option><option>Arabic</option><option>All Languages</option></select></div>
+<div><label>Visual Style</label>
+<select id="style"><option>Realistic</option><option>3D Animation</option><option>2D Animation</option><option>Cinematic</option><option>Anime</option><option>Fantasy</option></select></div>
+<div><label>Resolution</label>
+<select id="quality"><option>1080p</option><option>2K</option><option>4K</option></select></div>
+<div><label>Voice</label>
+<select id="voice"><option>Natural</option><option>Male</option><option>Female</option><option>Child</option><option>Dramatic</option></select></div>
+<div><label>Music</label>
+<select id="music"><option>Cinematic</option><option>Emotional</option><option>Action</option><option>Fantasy</option><option>None</option></select></div>
+<div><label>Duration</label>
+<select id="duration"><option>30 Seconds</option><option>1 Minute</option><option>5 Minutes</option><option>10 Minutes</option><option>Custom Long Video</option></select></div>
 </div>
-<div>
-<label>Visual Style</label>
-<select id="style">
-<option>Realistic</option><option>3D Animation</option>
-<option>2D Animation</option><option>Cinematic</option>
-<option>Anime</option><option>Fantasy</option>
-</select>
-</div>
-<div>
-<label>Quality</label>
-<select id="quality">
-<option>1080p</option><option>2K</option><option>4K</option>
-</select>
-</div>
-<div>
-<label>Voice Style</label>
-<select id="voice">
-<option>Natural</option><option>Male</option>
-<option>Female</option><option>Child</option>
-<option>Dramatic</option>
-</select>
-</div>
-<div>
-<label>Music Style</label>
-<select id="music">
-<option>Background Cinematic</option><option>Emotional</option>
-<option>Action</option><option>Fantasy</option>
-<option>None</option>
-</select>
-</div>
-<div>
-<label>Duration Preference</label>
-<select id="duration">
-<option>10 Seconds</option><option>30 Seconds</option>
-<option>1 Minute</option><option>5 Minutes</option>
-<option>Custom / Long Video</option>
-</select>
-</div>
-</div>
-
 <button class="generate" id="generate">✦ CREATE WITH OVA AI</button>
 <div id="status">Your creative journey starts here ✨</div>
 </section>
+
+<section class="section" id="gallery">
+<div class="section-head"><h2>✦ Your Creative Space</h2><span>MY WORKSPACE</span></div>
+<div class="gallery">
+<div class="gallery-card"><div>🎬</div>Video Projects</div>
+<div class="gallery-card"><div>🖼️</div>Image Projects</div>
+<div class="gallery-card"><div>🎵</div>Audio Projects</div>
+</div>
+</section>
+<footer>OVA AI © 2026 · CREATE YOUR OWN UNIVERSE</footer>
 </main>
-
-<footer>
-<div class="logo">OVA <span>AI</span></div>
-<p style="margin-top:12px">Create Your Imagination</p>
-<p style="margin-top:8px">© 2026 OVA AI Studio</p>
-</footer>
-
+</div>
 <script>
-const tools=document.querySelectorAll('.tool');
 const mode=document.getElementById('mode');
-tools.forEach(tool=>{
-tool.addEventListener('click',()=>{
-tools.forEach(t=>t.classList.remove('active'));
-tool.classList.add('active');
-mode.value=tool.dataset.mode;
+document.querySelectorAll('[data-mode]').forEach(el=>{
+el.addEventListener('click',()=>{
+mode.value=el.dataset.mode;
+document.querySelectorAll('.tool').forEach(t=>t.classList.toggle('active',t.dataset.mode===mode.value));
 document.getElementById('studio').scrollIntoView({behavior:'smooth'});
+});
+});
+document.querySelectorAll('[data-target]').forEach(el=>{
+el.addEventListener('click',()=>{
+document.getElementById(el.dataset.target).scrollIntoView({behavior:'smooth'});
+document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
+el.classList.add('active');
 });
 });
 document.getElementById('image').addEventListener('change',e=>{
 const file=e.target.files[0];
 if(file){
-const preview=document.getElementById('preview');
-preview.src=URL.createObjectURL(file);
-preview.hidden=false;
+const p=document.getElementById('preview');
+p.src=URL.createObjectURL(file);p.hidden=false;
 }
 });
 document.getElementById('generate').addEventListener('click',()=>{
 const prompt=document.getElementById('prompt').value.trim();
-if(!prompt){
-document.getElementById('status').textContent='Please enter your creative prompt first.';
-return;
-}
-document.getElementById('status').textContent=
-'✨ Your '+mode.value+' project is ready for AI engine connection. Generation requires an AI provider and API configuration.';
+const status=document.getElementById('status');
+if(!prompt){status.textContent='Please describe your imagination first.';return;}
+status.textContent='✦ Your '+mode.value+' project is prepared. Connect an AI generation provider to create your result.';
 });
 </script>
 </body>
