@@ -193,5 +193,60 @@ async function exportMixedVideo(){
  }catch(e){status.textContent="Export failed: "+e.message+" — Try Chrome/Edge and check that the video plays.";btn.disabled=false;if(recorder&&recorder.state!=="inactive")recorder.stop();if(ctx)ctx.close().catch(()=>{})}
 }
 </script>
-</body>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+const OVA_SUPABASE_URL = "https://hzasbkbviedinugceqly.supabase.co";
+const OVA_SUPABASE_ANON_KEY = "sb_publishable_tcXyp8SkylsnJV2jXGGGYw_VsxofgIb";
+const supabase = createClient(OVA_SUPABASE_URL, OVA_SUPABASE_ANON_KEY);
+
+const loginBtn = document.getElementById("googleLoginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const authMessage = document.getElementById("authMessage");
+const accountStatus = document.getElementById("accountStatus");
+
+loginBtn?.addEventListener("click", async () => {
+  loginBtn.disabled = true;
+  accountStatus.textContent = "Connecting to Google...";
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: window.location.origin + window.location.pathname }
+  });
+  if (error) {
+    accountStatus.textContent = "Google login error: " + error.message;
+    loginBtn.disabled = false;
+  }
+});
+
+logoutBtn?.addEventListener("click", async () => {
+  const { error } = await supabase.auth.signOut();
+  accountStatus.textContent = error ? error.message : "Signed out";
+});
+
+async function renderAccount(session) {
+  if (!session?.user) {
+    authMessage.textContent = "Sign in with Google to access your OVA AI account and credits.";
+    accountStatus.textContent = "Not signed in";
+    loginBtn?.classList.remove("hidden");
+    logoutBtn?.classList.add("hidden");
+    if (loginBtn) loginBtn.disabled = false;
+    return;
+  }
+  const user = session.user;
+  authMessage.textContent = "Welcome, " + (user.user_metadata?.full_name || user.email || "Creator");
+  loginBtn?.classList.add("hidden");
+  logoutBtn?.classList.remove("hidden");
+  const { data, error } = await supabase.from("profiles").select("credits,email").eq("id", user.id).maybeSingle();
+  accountStatus.textContent = error
+    ? "Signed in: " + user.email + " (profile is being prepared)"
+    : "Signed in: " + user.email + "  |  Credits: " + (data?.credits ?? 100);
+}
+supabase.auth.onAuthStateChange((_event, session) => {
+  setTimeout(() => renderAccount(session), 0);
+});
+const { data: { session } } = await supabase.auth.getSession();
+await renderAccount(session);
+</script>
+\n</body>
 </html>
