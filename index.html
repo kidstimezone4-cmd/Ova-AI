@@ -45,6 +45,15 @@ footer{text-align:center;padding:30px;border-top:1px solid #252744;color:#777f9e
 <section class="hero"><h1>Create Your Imagination</h1><p>AI Video • Voice • Music • Sound Effects</p></section>
 
 <section class="panel">
+<section class="panel" id="accountPanel">
+<h2>👤 OVA AI Account</h2>
+<p class="small" id="authMessage">Sign in with Google to access your OVA AI account and credits.</p>
+<div class="grid">
+<button id="googleLoginBtn" type="button">Continue with Google</button>
+<button id="logoutBtn" class="secondary hidden" type="button">Sign out</button>
+</div>
+<p class="status" id="accountStatus">Not signed in</p>
+</section>
 <h2>🎬 AI Video Generator</h2>
 <label>Describe Your Video</label>
 <textarea id="prompt" placeholder="Example: A luxury sports car driving through a futuristic city at night, cinematic lighting, realistic 3D animation..."></textarea>
